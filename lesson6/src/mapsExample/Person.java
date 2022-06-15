@@ -7,7 +7,6 @@ public class Person {
     public Person(String name, String email){
         this.name = name;
         this.email = email;
-
     }
 
     public void setName(String name){
@@ -24,5 +23,11 @@ public class Person {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString() {
+        System.out.println(name + ':' + email);
+        return "";
     }
 }
