@@ -6,7 +6,7 @@ public class Tester {
 
         System.out.println(customer);
 
-        Customer customer1 = new Customer("first", "second", "email");
+        Customer customer1 = new Customer("first", "second", "email@email.com");
         System.out.println(customer1);
 
     }
