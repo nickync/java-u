@@ -6,7 +6,6 @@ import service.CustomerService;
 import service.ReservationService;
 
 import java.util.Collection;
-import java.util.List;
 
 public class AdminResource {
 
@@ -17,14 +16,13 @@ public class AdminResource {
         return customerService.getCustomer(email);
     }
 
-    public void addRoom(List<IRoom> room) {
-        for (IRoom item : room) {
-            reservationService.addRoom(item);
-        }
+    public void addRoom(IRoom room) {
+        reservationService.addRoom(room);
     }
 
-    public Collection<IRoom> getAllRooms() {
-        return null;
+    public void getAllRooms() {
+        Collection<IRoom> allRooms = reservationService.getAllRooms();
+        System.out.println(allRooms);
     }
 
     public Collection<Customer> getAllCustomers() {

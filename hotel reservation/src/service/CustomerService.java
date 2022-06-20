@@ -11,7 +11,7 @@ public class CustomerService {
     private String firstName;
     private String lastName;
     // create hashmap for all customers
-    Map<String, Customer> customers = new HashMap<String, Customer>();
+    private final Map<String, Customer> customers = new HashMap<String, Customer>();
 
     public void addCustomer(String firstName, String lastName, String email) {
 

@@ -8,11 +8,11 @@ import java.util.*;
 
 public class ReservationService {
     // create all rooms data
-    private Map<String, IRoom> roomMap = new HashMap<String, IRoom>();
-    private Map<String, Reservation> reservationList = new HashMap<>();
+    private final Map<String, IRoom> roomMap = new HashMap<>();
+    private final Map<String, Reservation> reservationList = new HashMap<>();
 
 
-    public void addRoom(final IRoom room){
+    public void addRoom(IRoom room){
         roomMap.put(room.getRoomNumber(), room);
     }
 
@@ -34,11 +34,16 @@ public class ReservationService {
         return roomMap.values();
     }
 
+    public Collection<IRoom> getAllRooms(){
+        System.out.println("Room");
+        return roomMap.values();
+    }
+
     public Collection<Reservation> getCustomersReservation(Customer customer) {
 
         // create link to save found records
         Collection<Reservation> matchedReservation = new LinkedList<>();
-        matchedReservation.add(reservationList.get(customer));
+        matchedReservation.add(reservationList.get(customer.getEmail()));
         return matchedReservation;
     }
 
