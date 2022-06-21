@@ -7,11 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomerService {
-    private String email;
-    private String firstName;
-    private String lastName;
+
     // create hashmap for all customers
-    private final Map<String, Customer> customers = new HashMap<String, Customer>();
+    private static final Map<String, Customer> customers = new HashMap<String, Customer>();
 
     public void addCustomer(String firstName, String lastName, String email) {
 

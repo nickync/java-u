@@ -24,10 +24,13 @@ public class AdminMenu {
 
                 if(input.equals("1")){
                     adminResource.getAllCustomers();
+
                 } else if (input.equals("2")){
                     adminResource.getAllRooms();
+
                 } else if (input.equals("3")){
                     adminResource.displayAllReservations();
+
                 } else if (input.equals("4")){
                     System.out.println("Room Number: ");
                     String roomNumber = scanner.next();

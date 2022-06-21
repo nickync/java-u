@@ -6,6 +6,7 @@ import model.Reservation;
 import service.CustomerService;
 import service.ReservationService;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,13 +18,14 @@ public class HotelResource {
         return customerService.getCustomer(email);
     }
 
-    public void createACustomer(String email, String firstName, String lastName) {
+    public void createACustomer(String firstName, String lastName, String email) {
 
         customerService.addCustomer(firstName, lastName, email);
 
     }
 
     public IRoom getRoom(String roomNumber) {
+
         return reservationService.getARoom(roomNumber);
     }
 
@@ -35,7 +37,11 @@ public class HotelResource {
         return reservationService.getCustomersReservation(customerService.getCustomer(customerEmail));
     }
 
-    public Collection<IRoom> findARoom(Date checkIn, Date checkOut) {
+    public Collection<IRoom> findARoom(Date checkIn, Date checkOut) throws ParseException {
         return reservationService.findRooms(checkIn, checkOut);
+    }
+
+    public void getAllRooms(){
+        reservationService.getAllRooms();
     }
 }

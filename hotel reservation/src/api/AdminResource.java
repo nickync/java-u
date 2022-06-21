@@ -22,7 +22,7 @@ public class AdminResource {
 
     public void getAllRooms() {
         Collection<IRoom> allRooms = reservationService.getAllRooms();
-        System.out.println(allRooms);
+
     }
 
     public Collection<Customer> getAllCustomers() {
