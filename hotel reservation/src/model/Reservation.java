@@ -3,10 +3,10 @@ package model;
 import java.util.Date;
 
 public class Reservation {
-    private Customer customer;
-    private IRoom room;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private final Customer customer;
+    private final IRoom room;
+    private final Date checkInDate;
+    private final Date checkOutDate;
 
     public Reservation(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
         super();
@@ -31,7 +31,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return customer.getName() + "*" + checkInDate +"*" + checkOutDate + " Room: " + room.getRoomNumber();
+        return customer.getName() + " * " + checkInDate +" * " + checkOutDate + " Room: " + room.getRoomNumber();
     }
 
 }

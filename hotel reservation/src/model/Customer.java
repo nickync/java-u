@@ -3,18 +3,19 @@ package model;
 import java.util.regex.Pattern;
 
 public class Customer {
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
-    private String email;
-    private String emailRegex = "^(.+)@(.+).(.+)$";
-
-    private Pattern pattern = Pattern.compile(emailRegex);
+    private final String email;
 
     public Customer(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
+
+        String emailRegex = "^(.+)@(.+).(.+)$";
+        Pattern pattern = Pattern.compile(emailRegex);
+
         if(!pattern.matcher(email).matches()){
             throw new IllegalArgumentException("Invalid Email");
         }

@@ -5,14 +5,15 @@ import model.RoomType;
 import java.util.Scanner;
 
 public class AdminMenu {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static AdminResource adminResource = new AdminResource();
 
     public AdminMenu(){
-        AdminResource adminResource = new AdminResource();
 
-        String input = "";
         try {
+            String input = "";
             do {
-                Scanner scanner = new Scanner(System.in);
+
 
                 System.out.println("1. See all customers.");
                 System.out.println("2. See all rooms.");
@@ -22,35 +23,48 @@ public class AdminMenu {
 
                 input = scanner.next();
 
-                if(input.equals("1")){
-                    adminResource.getAllCustomers();
-
-                } else if (input.equals("2")){
-                    adminResource.getAllRooms();
-
-                } else if (input.equals("3")){
-                    adminResource.displayAllReservations();
-
-                } else if (input.equals("4")){
-                    System.out.println("Room Number: ");
-                    String roomNumber = scanner.next();
-                    System.out.println("Room Price: ");
-                    double price = Double.parseDouble(scanner.next());
-                    System.out.println("Room Type: ");
-                    String type = scanner.next();
-
-                    RoomType roomType = RoomType.valueOf(type);
-
-                    Room room = new Room(roomNumber, price,roomType);
-
-                    adminResource.addRoom(room);
-
-                } else if (input.equals("5")){
-                    MainMenu.mainMenu();
+                switch (input) {
+                    case "1" -> adminResource.getAllCustomers();
+                    case "2" -> adminResource.getAllRooms();
+                    case "3" -> seeReservation();
+                    case "4" -> addRoom();
+                    case "5" -> MainMenu.mainMenu();
                 }
             } while (input != "5");
         } catch (StringIndexOutOfBoundsException err){
             System.out.println(err);
+        }
+    }
+
+    public static void addRoom(){
+        System.out.println("Room Number: ");
+        String roomNumber = scanner.next();
+        System.out.println("Room Price: ");
+        try {
+            double price = Double.parseDouble(scanner.next());
+            System.out.println("Room Type: ");
+            String type = scanner.next();
+
+            RoomType roomType = RoomType.valueOf(type);
+
+            Room room = new Room(roomNumber, price,roomType);
+
+            adminResource.addRoom(room);
+
+        } catch (NumberFormatException err) {
+
+            System.out.println("Please enter a number. ");
+
+        } catch (IllegalArgumentException err) {
+            System.out.println("ROOM TYPE accepts \"SINGLE\" or \"DOUBLE\" only!!!");
+        }
+    }
+
+    public static void seeReservation(){
+        try {
+            adminResource.displayAllReservations();
+        } catch (NullPointerException err) {
+            System.out.println("No reservations!");
         }
     }
 }
