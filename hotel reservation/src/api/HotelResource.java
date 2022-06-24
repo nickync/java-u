@@ -39,14 +39,21 @@ public class HotelResource {
     public Collection<IRoom> findARoom(Date checkIn, Date checkOut) {
 
         Collection<IRoom> availableRooms = reservationService.findRooms(checkIn, checkOut);
+
         Collection<IRoom> availableRooms7 = reservationService.findRooms7(checkIn, checkOut);
 
         for (IRoom room : availableRooms){
             System.out.println("Available room: " + room.getRoomNumber() + " Price: " + room.getRoomPrice() + " Room Type: " + room.getRoomType());
         }
 
-        for (IRoom room : availableRooms7){
-            System.out.println("Alternative date room: " + room.getRoomNumber() + " Price: " + room.getRoomPrice() + " Room Type: " + room.getRoomType());
+        try {
+            System.out.println("Checking alternative dates: ");
+            for (IRoom room : availableRooms7) {
+                System.out.println("Alternative date room: " + room.getRoomNumber() + " Price: " + room.getRoomPrice() + " Room Type: " + room.getRoomType());
+            }
+            return null;
+        } catch (NullPointerException err) {
+            System.out.println("No alternative rooms!");
         }
         return null;
     }

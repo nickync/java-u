@@ -34,4 +34,26 @@ public class Reservation {
         return customer.getName() + " * " + checkInDate +" * " + checkOutDate + " Room: " + room.getRoomNumber();
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+
+        if (!(o instanceof Reservation reservation)) {
+            return false;
+        }
+
+        if ((o instanceof Reservation) && (((Reservation) o).getCheckInDate() == ((Reservation) o).getCheckInDate())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode(){
+        int hashCode = 10;
+        hashCode = (32 * hashCode);
+        return hashCode;
+    }
 }

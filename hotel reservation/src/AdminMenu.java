@@ -8,7 +8,7 @@ public class AdminMenu {
     private static final Scanner scanner = new Scanner(System.in);
     private static AdminResource adminResource = new AdminResource();
 
-    public AdminMenu(){
+    public AdminMenu() {
 
         try {
             String input = "";
@@ -31,23 +31,23 @@ public class AdminMenu {
                     case "5" -> MainMenu.mainMenu();
                 }
             } while (input != "5");
-        } catch (StringIndexOutOfBoundsException err){
+        } catch (StringIndexOutOfBoundsException err) {
             System.out.println(err);
         }
     }
 
-    public static void addRoom(){
+    public static void addRoom() {
         System.out.println("Room Number: ");
         String roomNumber = scanner.next();
         System.out.println("Room Price: ");
         try {
             double price = Double.parseDouble(scanner.next());
-            System.out.println("Room Type: ");
+            System.out.println("Room Type: \"SINGLE\" or \"DOUBLE\" only!!!");
             String type = scanner.next();
 
             RoomType roomType = RoomType.valueOf(type);
 
-            Room room = new Room(roomNumber, price,roomType);
+            Room room = new Room(roomNumber, price, roomType);
 
             adminResource.addRoom(room);
 
@@ -60,11 +60,7 @@ public class AdminMenu {
         }
     }
 
-    public static void seeReservation(){
-        try {
-            adminResource.displayAllReservations();
-        } catch (NullPointerException err) {
-            System.out.println("No reservations!");
-        }
+    public static void seeReservation() {
+        adminResource.displayAllReservations();
     }
 }

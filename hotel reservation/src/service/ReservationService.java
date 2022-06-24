@@ -14,11 +14,7 @@ public class ReservationService {
     private static final Map<String, Reservation> reservationList = new HashMap<>();
 
     private static final Collection<IRoom> availableRooms = new LinkedList<>(roomMap.values());
-
-
     private static final Collection<IRoom> availableRooms7 = new LinkedList<>();
-
-
 
     public void addRoom(final IRoom room){
         roomMap.put(room.getRoomNumber(), room);
@@ -28,7 +24,7 @@ public class ReservationService {
         return roomMap.get(roomId);
     }
 
-    public void reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate){
+    public void reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Calendar calendar = Calendar.getInstance();
@@ -39,57 +35,49 @@ public class ReservationService {
             Date checkInDate7 = sdf.parse(checkInDatePrePro);
             Date checkOutDate7 = sdf.parse(checkOutDatePrePro);
 
-            if(roomMap.isEmpty()) {
+            if (roomMap.isEmpty()) {
                 System.out.println("No rooms were added to the System!");
-            } else if (reservationList.isEmpty()) {
+                return;
+            }
+
+            if (reservationList.isEmpty()) {
                 Reservation currentReservation = new Reservation(customer, room, checkInDate, checkOutDate);
                 reservationList.put(customer.getEmail(), currentReservation);
-                System.out.println("Room" + currentReservation.getRoom() + " is reserved!");
+                System.out.println("Room" + currentReservation.getRoom().getRoomNumber() + " is reserved!");
             } else {
-                    for (Reservation reservation : reservationList.values()) {
-                        if ((Objects.equals(reservation.getRoom().getRoomNumber(), room.getRoomNumber()) &&
-                                reservation.getCheckInDate() == checkInDate &&
-                                reservation.getCheckOutDate() == checkOutDate)) {
-                            System.out.println("Checking other days......");
-                            if (Objects.equals(reservation.getRoom().getRoomNumber(), room.getRoomNumber()) &&
-                                    reservation.getCheckInDate() == checkInDate7 &&
-                                    reservation.getCheckOutDate() == checkOutDate7){
-                                System.out.println("No rooms available....!");
-                            } else {
-                                Reservation currentReservation = new Reservation(customer, room, checkInDate7, checkOutDate7);
-                                reservationList.put(customer.getEmail(), currentReservation);
-                                System.out.println("Room" + currentReservation.getRoom() + " is reserved!");
-                            }
-                        } else if (roomMap.containsValue(room)) {
-                            Reservation currentReservation = new Reservation(customer, room, checkInDate, checkOutDate);
-                            reservationList.put(customer.getEmail(), currentReservation);
-                            System.out.println("Room reserved");
-                            return;
-                        } else {
-                            System.out.println("Room not found in the hotel!");
-                            return;
-                        }
-                    }
+                if (availableRooms.contains(room)) {
+                    Reservation currentReservation = new Reservation(customer, room, checkInDate, checkOutDate);
+                    reservationList.put(customer.getEmail(), currentReservation);
+                    System.out.println("Room" + currentReservation.getRoom().getRoomNumber() + " is reserved!");
+
+                } else if (availableRooms7.contains(room)){
+                    Reservation currentReservation = new Reservation(customer, room, checkInDate7, checkOutDate7);
+                    reservationList.put(customer.getEmail(), currentReservation);
+                    System.out.println("Room" + currentReservation.getRoom().getRoomNumber() + " is reserved!");
                 }
-        } catch (ParseException err) {
-            System.out.println("Invalid Date format!");
+            }
+        }catch(ParseException err){
+                System.out.println("Invalid Date format!");
+            }
         }
-    }
 
     public Collection<IRoom> findRooms(Date checkInDate, Date checkOutDate){
-        try {
 
-                reservationList.values().forEach(item -> {
-                    System.out.println(item.getCheckInDate());
-                    System.out.println(checkInDate);
-                    if (!(item.getCheckInDate() == checkInDate && item.getCheckOutDate() == checkOutDate)) {
-                        availableRooms.removeIf(e -> e == item.getRoom());
-                        System.out.println("Checking alternative dates...");
-                    } else {
-                        availableRooms.add(item.getRoom());
-                    }
-                });
+        roomMap.values().forEach(item -> {
+            if (!(availableRooms.contains(item))){
+                availableRooms.add(item);
+            }
+        });
+
+        try {
+            reservationList.values().forEach(item -> {
+                if (!(item.getCheckInDate() == checkInDate && item.getCheckOutDate() == checkOutDate)) {
+                    availableRooms.removeIf(e -> (e == item.getRoom()));
+                }
+            });
+
             return availableRooms;
+
         }catch (NullPointerException err){
             System.out.println(err);
         }
@@ -111,7 +99,7 @@ public class ReservationService {
             reservationList.values().forEach(item -> {
                 if (item.getCheckInDate() == checkInDate7 && item.getCheckOutDate() == checkOutDate7) {
                     System.out.println("No rooms available on alternative dates!");
-                } else {
+                } else if (!(availableRooms7.contains(item.getRoom()))) {
                     availableRooms7.add(item.getRoom());
                 }
             });
@@ -138,7 +126,10 @@ public class ReservationService {
     }
 
     public void printAllReservation() {
-
-        reservationList.forEach((key, value) -> System.out.println(key + "<-*-> " + value.toString()));
+        if(reservationList.isEmpty()){
+            System.out.println("No reservations yet.");
+        } else {
+            reservationList.forEach((key, value) -> System.out.println(key + "<-*-> " + value.toString()));
+        }
     }
 }

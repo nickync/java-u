@@ -50,7 +50,7 @@ public class MainMenu {
 
         System.out.println("Enter your check in: MM/dd/yyyy");
         String dayIn = scanner.next();
-        System.out.println("Enter your check out date: ");
+        System.out.println("Enter your check out date: MM/dd/yyyy");
         String dayOut = scanner.next();
         try {
             Date checkIn = new SimpleDateFormat("MM/dd/yyyy").parse(dayIn);
@@ -68,8 +68,8 @@ public class MainMenu {
                 if(hotelResource.getCustomer(email) == null){
                     System.out.println("Please create an account: ");
                     createAnAccount();
-                };
-                System.out.println("What room would you like to reserve: ");
+                }
+                System.out.println("Which room would you like to reserve: ");
                 //hotelResource.getAllRooms();
                 String room = scanner.next();
 
@@ -84,7 +84,7 @@ public class MainMenu {
             }
 
         } catch (ParseException err) {
-            System.out.println(err);
+            System.out.println("Invalid format!");
         }
     }
 
