@@ -16,6 +16,13 @@ public class ReservationService {
     private static final Collection<IRoom> availableRooms = new LinkedList<>(roomMap.values());
     private static final Collection<IRoom> availableRooms7 = new LinkedList<>();
 
+    private static final ReservationService reservationService = new ReservationService();
+
+    private ReservationService(){}
+
+    public static ReservationService singleton(){
+        return reservationService;
+    }
     public void addRoom(final IRoom room){
         roomMap.put(room.getRoomNumber(), room);
     }
@@ -25,12 +32,16 @@ public class ReservationService {
     }
 
     public void reserveARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
+        working();
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Calendar calendar = Calendar.getInstance();
+            calendar.setTime(checkInDate);
             calendar.add(Calendar.DAY_OF_MONTH, 7);
-            String checkInDatePrePro = sdf.format(checkInDate);
-            String checkOutDatePrePro = sdf.format(checkOutDate);
+            String checkInDatePrePro = sdf.format(calendar.getTime());
+            calendar.setTime(checkOutDate);
+            calendar.add(Calendar.DAY_OF_MONTH, 7);
+            String checkOutDatePrePro = sdf.format(calendar.getTime());
 
             Date checkInDate7 = sdf.parse(checkInDatePrePro);
             Date checkOutDate7 = sdf.parse(checkOutDatePrePro);
@@ -45,15 +56,17 @@ public class ReservationService {
                 reservationList.put(customer.getEmail(), currentReservation);
                 System.out.println("Room" + currentReservation.getRoom().getRoomNumber() + " is reserved!");
             } else {
-                if (availableRooms.contains(room)) {
-                    Reservation currentReservation = new Reservation(customer, room, checkInDate, checkOutDate);
-                    reservationList.put(customer.getEmail(), currentReservation);
-                    System.out.println("Room" + currentReservation.getRoom().getRoomNumber() + " is reserved!");
-
-                } else if (availableRooms7.contains(room)){
+                if (availableRooms7.contains(room)) {
+                    System.out.println("alternative room");
+                    System.out.println(checkOutDate7+" "+checkInDate7);
                     Reservation currentReservation = new Reservation(customer, room, checkInDate7, checkOutDate7);
                     reservationList.put(customer.getEmail(), currentReservation);
                     System.out.println("Room" + currentReservation.getRoom().getRoomNumber() + " is reserved!");
+
+                } else if (availableRooms.contains(room)){
+                    Reservation currentReservation = new Reservation(customer, room, checkInDate, checkOutDate);
+                    reservationList.put(customer.getEmail(), currentReservation);
+                    System.out.println("Room " + currentReservation.getRoom().getRoomNumber() + " is reserved!");
                 }
             }
         }catch(ParseException err){
@@ -131,5 +144,11 @@ public class ReservationService {
         } else {
             reservationList.forEach((key, value) -> System.out.println(key + "<-*-> " + value.toString()));
         }
+    }
+
+    // Default
+     String working(){
+        System.out.println("System working hard................");
+        return null;
     }
 }

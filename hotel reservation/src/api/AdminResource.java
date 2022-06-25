@@ -9,8 +9,8 @@ import java.util.Collection;
 
 public class AdminResource {
 
-    ReservationService reservationService = new ReservationService();
-    CustomerService customerService = new CustomerService();
+    private final CustomerService customerService = CustomerService.singleton();
+    private final ReservationService reservationService = ReservationService.singleton();
 
     public Customer getCustomer(String email) {
         return customerService.getCustomer(email);

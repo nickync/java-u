@@ -11,6 +11,14 @@ public class CustomerService {
     // create hashmap for all customers
     private static final Map<String, Customer> customers = new HashMap<String, Customer>();
 
+    private static final CustomerService customerService = new CustomerService();
+
+    private CustomerService(){}
+
+    public static CustomerService singleton(){
+        return customerService;
+    }
+
     public void addCustomer(String firstName, String lastName, String email) {
 
         // add customers to map

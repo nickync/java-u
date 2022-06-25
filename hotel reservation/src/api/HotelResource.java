@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.Date;
 
 public class HotelResource {
-    CustomerService customerService = new CustomerService();
-    ReservationService reservationService = new ReservationService();
+    private final CustomerService customerService = CustomerService.singleton();
+    private final ReservationService reservationService = ReservationService.singleton();
 
     public Customer getCustomer(String email) {
         return customerService.getCustomer(email);
@@ -61,4 +61,6 @@ public class HotelResource {
     public void getAllRooms(){
         reservationService.getAllRooms();
     }
+
+
 }
