@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0.025" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-17.0.3.1.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/zheng/Desktop/JAVA/unitTesting2/cart/target/surefire/surefirebooter8954914971010441330.jar /Users/zheng/Desktop/JAVA/unitTesting2/cart/target/surefire 2022-07-09T23-28-54_762-jvmRun1 surefire10539530031931982415tmp surefire_09933224211376897965tmp"/>
+    <property name="sun.java.command" value="/Users/zheng/Desktop/JAVA/unitTesting2/cart/target/surefire/surefirebooter16403488393436354163.jar /Users/zheng/Desktop/JAVA/unitTesting2/cart/target/surefire 2022-07-10T00-55-39_683-jvmRun1 surefire6104390851658145217tmp surefire_06959482399999584867tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/zheng/Desktop/JAVA/unitTesting2/cart/target/test-classes:/Users/zheng/Desktop/JAVA/unitTesting2/cart/target/classes:/Users/zheng/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar:/Users/zheng/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/Users/zheng/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/zheng/.m2/repository/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar:/Users/zheng/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar:/Users/zheng/.m2/repository/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar:/Users/zheng/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar:"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/Users/zheng/Desktop/JAVA/unitTesting2/cart/target/surefire/surefirebooter8954914971010441330.jar"/>
+    <property name="surefire.real.class.path" value="/Users/zheng/Desktop/JAVA/unitTesting2/cart/target/surefire/surefirebooter16403488393436354163.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="17.0.3.1+2-LTS-6"/>
@@ -55,6 +55,9 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="totalsWithDiscounts_regularAndPlatinumUser_returnsDifferentSubtotal" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0"/>
-  <testcase name="totalsWithDiscount_getTotals_reducesUserCredit" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0"/>
+  <testcase name="getTotalWithDiscounts_userWithCredit_chargedMultipleTimes{RepetitionInfo}[1]" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0.002"/>
+  <testcase name="getTotalWithDiscounts_userWithCredit_chargedMultipleTimes{RepetitionInfo}[2]" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0.001"/>
+  <testcase name="getTotalWithDiscounts_userWithCredit_chargedMultipleTimes{RepetitionInfo}[3]" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0"/>
+  <testcase name="getTotalWithDiscounts_regularAndPlatinumUser_returnsDifferentSubtotal{User, CartTotals}[1]" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0.008"/>
+  <testcase name="getTotalWithDiscounts_regularAndPlatinumUser_returnsDifferentSubtotal{User, CartTotals}[2]" classname="com.udacity.cart.service.TotalsWithDiscountCalculatorTest" time="0.001"/>
 </testsuite>

@@ -12,15 +12,60 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TotalsWithDiscountCalculatorTest {
 
+	static User globalUser;
+	TotalsWithDiscountCalculator totalsWithDiscountCalculator;
 
-	// Replace this with a Repeated test. Use a BeforeAll method to create a user whose credit
+	@BeforeAll
+	static void setGlobalUser(){
+		System.out.println("Setting up a global user");
+		globalUser = new User("Global user", UserType.REGULAR, 100.00);
+	}
+
+	@BeforeEach
+	void setupCalcutor(){
+		System.out.println("Setting up a new calculator");
+		totalsWithDiscountCalculator = new TotalsWithDiscountCalculator(globalUser);
+	}
+
+	@RepeatedTest(3)
+	void getTotalWithDiscounts_userWithCredit_chargedMultipleTimes(RepetitionInfo repetitionInfo){
+		totalsWithDiscountCalculator.getTotals(List.of(new CartItem("Twenty dollar item", 20, 0)));
+		assertEquals(100-20* repetitionInfo.getCurrentRepetition(), globalUser.getCredit());
+	}
+
+	@ParameterizedTest
+	@MethodSource("differentUserTypesAndExpectedTotals")
+	void getTotalWithDiscounts_regularAndPlatinumUser_returnsDifferentSubtotal(User user, CartTotals expectedCartTotals) {
+		TotalsWithDiscountCalculator calculator = new TotalsWithDiscountCalculator(user);
+
+		CartTotals totals = calculator.getTotals(List.of(new CartItem("Ten dollar item", 10.0, 1.0)));
+
+		assertEquals(expectedCartTotals, totals);
+	}
+
+	private static Stream<Arguments> differentUserTypesAndExpectedTotals(){
+		return Stream.of(
+				Arguments.of(
+						new User("Regular User", UserType.REGULAR, 0.0),
+						new CartTotals(10,1)
+				),
+				Arguments.of(
+						new User("Platinum User", UserType.PLATINUM, 0.0),
+						new CartTotals(9,1)
+				)
+		);
+	}
+
+}
+
+// Replace this with a Repeated test. Use a BeforeAll method to create a user whose credit
 	// will be reduced with each repetition, and use a BeforeEach method to create a new TotalsWithDiscountCalculator
 	// for each repetition.
-	@Test
+/*	@Test
 	public void totalsWithDiscount_getTotals_reducesUserCredit() {
 		User user = new User("UserPerson", UserType.REGULAR, 100.00);
 
@@ -32,12 +77,12 @@ class TotalsWithDiscountCalculatorTest {
 			expected = 100.0 - (i * 20);
 			assertEquals(expected, user.getCredit());
 		}
-	}
+	}*/
 
 	// Replace this with a parameterized test that uses a MethodSource to provide
 	// a stream of arguments allowing you to test both regular and platinum users with the
 	// same test.
-	@Test
+/*	@Test
 	public void totalsWithDiscounts_regularAndPlatinumUser_returnsDifferentSubtotal() {
 		User regularUser = new User("Regular User", UserType.REGULAR, 0.0);
 		CartTotals expectedRegularTotal = new CartTotals(10.0, 1.0);
@@ -53,5 +98,4 @@ class TotalsWithDiscountCalculatorTest {
 		assertEquals(expectedPlatinumTotal, platinumCalculator.getTotals(List.of(item)));
 
 
-	}
-}
+	}*/
