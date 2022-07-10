@@ -1,0 +1,6 @@
+com/udacity/cart/service/TotalsCalculator.class
+com/udacity/cart/model/User.class
+com/udacity/cart/service/TotalsWithDiscountCalculator.class
+com/udacity/cart/model/UserType.class
+com/udacity/cart/model/CartItem.class
+com/udacity/cart/model/CartTotals.class
