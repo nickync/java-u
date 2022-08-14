@@ -4,7 +4,7 @@ module com.udacity.catpoint {
     requires com.udacity.catpoint.image;
     requires com.udacity.catpoint.security;
     opens com.udacity.catpoint.application to com.udacity.catpoint.security;
-    exports com.udacity.catpoint.image;
+    exports com.udacity.catpoint.imageService.image;
     exports com.udacity.catpoint.application;
 
 }

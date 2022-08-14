@@ -1,8 +1,8 @@
 package com.udacity.catpoint.application;
 
+import com.udacity.catpoint.imageService.StyleService;
 import com.udacity.catpoint.security.data.Sensor;
 import com.udacity.catpoint.security.data.SensorType;
-import com.udacity.catpoint.image.StyleService;
 import com.udacity.catpoint.security.securityService.SecurityService;
 import net.miginfocom.swing.MigLayout;
 
