@@ -1,4 +1,4 @@
-package com.udacity.catpoint.application;
+package com.udacity.catpoint.security.application;
 
 import com.udacity.catpoint.security.data.PretendDatabaseSecurityRepositoryImpl;
 import com.udacity.catpoint.security.data.SecurityRepository;

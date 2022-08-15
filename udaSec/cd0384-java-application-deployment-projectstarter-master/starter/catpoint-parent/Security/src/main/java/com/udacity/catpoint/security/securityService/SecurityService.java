@@ -1,6 +1,6 @@
 package com.udacity.catpoint.security.securityService;
 
-import com.udacity.catpoint.application.StatusListener;
+import com.udacity.catpoint.security.application.StatusListener;
 import com.udacity.catpoint.security.data.ArmingStatus;
 import com.udacity.catpoint.security.data.Sensor;
 import com.udacity.catpoint.security.data.AlarmStatus;
