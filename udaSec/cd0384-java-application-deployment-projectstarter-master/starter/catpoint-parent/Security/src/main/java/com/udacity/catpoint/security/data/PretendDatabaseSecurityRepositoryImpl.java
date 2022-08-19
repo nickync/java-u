@@ -15,7 +15,7 @@ import java.util.prefs.Preferences;
  */
 public class PretendDatabaseSecurityRepositoryImpl implements SecurityRepository{
 
-    private Set<Sensor> sensors;
+    private final Set<Sensor> sensors;
     private AlarmStatus alarmStatus;
     private ArmingStatus armingStatus;
 
@@ -25,7 +25,7 @@ public class PretendDatabaseSecurityRepositoryImpl implements SecurityRepository
     private static final String ARMING_STATUS = "ARMING_STATUS";
 
     private static final Preferences prefs = Preferences.userNodeForPackage(PretendDatabaseSecurityRepositoryImpl.class);
-    private static final Gson gson = new Gson(); //used to serialize objects into JSON
+    private final Gson gson = new Gson(); //used to serialize objects into JSON
 
     public PretendDatabaseSecurityRepositoryImpl() {
         //load system state from prefs, or else default

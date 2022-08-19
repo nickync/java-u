@@ -1,12 +1,11 @@
 package com.udacity.catpoint.security.securityService;
 
+import com.udacity.catpoint.imageService.ImageService;
 import com.udacity.catpoint.security.application.StatusListener;
-import com.udacity.catpoint.security.data.ArmingStatus;
-import com.udacity.catpoint.security.data.Sensor;
 import com.udacity.catpoint.security.data.AlarmStatus;
+import com.udacity.catpoint.security.data.ArmingStatus;
 import com.udacity.catpoint.security.data.SecurityRepository;
-import com.udacity.catpoint.imageService.FakeImageService;
-
+import com.udacity.catpoint.security.data.Sensor;
 
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
@@ -21,11 +20,11 @@ import java.util.Set;
  */
 public class SecurityService {
 
-    private FakeImageService imageService;
+    private ImageService imageService;
     private SecurityRepository securityRepository;
     private Set<StatusListener> statusListeners = new HashSet<>();
 
-    public SecurityService(SecurityRepository securityRepository, FakeImageService imageService) {
+    public SecurityService(SecurityRepository securityRepository, ImageService imageService) {
         this.securityRepository = securityRepository;
         this.imageService = imageService;
     }
@@ -107,13 +106,18 @@ public class SecurityService {
      * @param active
      */
     public void changeSensorActivationStatus(Sensor sensor, Boolean active) {
-        if(!sensor.getActive() && active) {
-            handleSensorActivated();
-        } else if (sensor.getActive() && !active) {
-            handleSensorDeactivated();
+
+        AlarmStatus alarmStatus = securityRepository.getAlarmStatus();
+
+        if (alarmStatus != AlarmStatus.ALARM){
+            if(active) {
+                handleSensorActivated();
+            } else if (sensor.getActive()) {
+                handleSensorDeactivated();
+            }
+            sensor.setActive(active);
+            securityRepository.updateSensor(sensor);
         }
-        sensor.setActive(active);
-        securityRepository.updateSensor(sensor);
     }
 
     /**

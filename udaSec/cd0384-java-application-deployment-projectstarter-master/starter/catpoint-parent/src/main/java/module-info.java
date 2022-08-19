@@ -1,10 +1,8 @@
-module com.udacity.catpoint {
-    requires java.desktop;
-    requires miglayout;
-    requires com.udacity.catpoint.image;
-    requires com.udacity.catpoint.security;
-    opens com.udacity.catpoint.application to com.udacity.catpoint.security;
-    exports com.udacity.catpoint.imageService.image;
-    exports com.udacity.catpoint.application;
-
-}
+//module com.udacity.catpoint.application {
+//    requires java.desktop;
+//    requires miglayout;
+//    requires com.udacity.catpoint.imageService;
+//    requires com.udacity.catpoint.security;
+//
+//
+//}
