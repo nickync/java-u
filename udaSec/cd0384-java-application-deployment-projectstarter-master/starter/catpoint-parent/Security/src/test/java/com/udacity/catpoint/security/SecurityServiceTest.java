@@ -164,4 +164,20 @@ public class SecurityServiceTest {
         securityService.removeSensor(sensor);
     }
 
+    @Test
+    void setArmingTest () {
+        securityService.setArmingStatus(ArmingStatus.DISARMED);
+        //verify(securityService,times(1)).setArmingStatus(ArmingStatus.DISARMED);
+    }
+
+//    @Test
+//    void handleSensorDeactivatedTest(){
+//        when(securityRepository.getAlarmStatus()).thenReturn(AlarmStatus.ALARM);
+//
+//    }
+
+    @Test
+    void getAlarmStatusTest(){
+        securityService.getAlarmStatus();
+    }
 }
