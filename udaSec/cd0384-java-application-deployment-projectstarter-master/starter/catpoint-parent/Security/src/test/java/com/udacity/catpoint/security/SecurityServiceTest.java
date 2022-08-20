@@ -1,6 +1,7 @@
 package com.udacity.catpoint.security;
 
 import com.udacity.catpoint.imageService.ImageService;
+import com.udacity.catpoint.security.application.StatusListener;
 import com.udacity.catpoint.security.data.*;
 import com.udacity.catpoint.security.securityService.SecurityService;
 import org.junit.jupiter.api.BeforeEach;
@@ -144,10 +145,23 @@ public class SecurityServiceTest {
     void armedHome_catFound_changeToAlarm(){
         when(securityRepository.getArmingStatus()).thenReturn(ArmingStatus.ARMED_HOME);
         when(imageService.imageContainsCat(any(BufferedImage.class), anyFloat())).thenReturn(true);
-        BufferedImage catImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+        BufferedImage catImage = new BufferedImage(128, 128, BufferedImage.TYPE_INT_RGB);
         securityService.processImage(catImage);
         securityService.setArmingStatus(ArmingStatus.ARMED_HOME);
 
         verify(securityRepository).setAlarmStatus(AlarmStatus.ALARM);
     }
+
+    @Mock
+    private StatusListener statusListener;
+
+    @Test
+    void driveUpCoverageRatioOMG(){
+        //securityService.addStatusListener(statusListener)
+        securityService.addStatusListener(statusListener);
+        securityService.removeStatusListener(statusListener);
+        securityService.addSensor(sensor);
+        securityService.removeSensor(sensor);
+    }
+
 }

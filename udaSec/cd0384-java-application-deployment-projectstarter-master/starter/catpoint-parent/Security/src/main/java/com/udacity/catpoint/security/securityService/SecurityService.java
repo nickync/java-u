@@ -115,9 +115,9 @@ public class SecurityService {
             } else if (sensor.getActive()) {
                 handleSensorDeactivated();
             }
-            sensor.setActive(active);
-            securityRepository.updateSensor(sensor);
         }
+        sensor.setActive(active);
+        securityRepository.updateSensor(sensor);
     }
 
     /**
