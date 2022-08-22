@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -17,6 +18,8 @@ import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
@@ -109,9 +112,19 @@ public class SecurityServiceTest {
         verify(securityRepository, times(1)).setAlarmStatus(AlarmStatus.ALARM);
     }
 
+    private Set<Sensor> getAllSensors(int count, boolean status){
+        var sensors = IntStream.range(0,count).mapToObj(i -> new Sensor(uuid, SensorType.DOOR)).collect(Collectors.toCollection(HashSet::new));
+
+        sensors.forEach(sensor -> sensor.setActive(status));
+
+        return sensors;
+    }
+
     @Test
     void sensorInactive_catNotFound_changeToNoAlarm(){
 
+        //Set<Sensor> sensors = getAllSensors(3,false);
+        //when(securityRepository.getSensors()).thenReturn(sensors);
         BufferedImage catImage = new BufferedImage(128,128,BufferedImage.TYPE_INT_RGB);
         when(imageService.imageContainsCat(any(BufferedImage.class), anyFloat())).thenReturn(false);
         securityService.processImage(catImage);
