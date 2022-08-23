@@ -44,6 +44,10 @@ public class SecurityService {
 
         }
 
+        if (armingStatus != ArmingStatus.DISARMED && catDetected){
+            setAlarmStatus(AlarmStatus.ALARM);
+        }
+
         securityRepository.setArmingStatus(armingStatus);
         statusListeners.forEach(StatusListener::sensorStatusChanged);
     }
