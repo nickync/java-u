@@ -24,7 +24,6 @@ public class SecurityService {
     private SecurityRepository securityRepository;
     private Set<StatusListener> statusListeners = new HashSet<>();
 
-    private boolean catDetected = false;
 
     public SecurityService(SecurityRepository securityRepository, ImageService imageService) {
         this.securityRepository = securityRepository;
@@ -46,7 +45,7 @@ public class SecurityService {
         }
 
         securityRepository.setArmingStatus(armingStatus);
-        statusListeners.forEach(sl -> sl.sensorStatusChanged());
+        statusListeners.forEach(StatusListener::sensorStatusChanged);
     }
 
 //    private void resetSensorsInactive(){
@@ -62,7 +61,6 @@ public class SecurityService {
      * @param cat True if a cat is detected, otherwise false.
      */
     private void catDetected(Boolean cat) {
-        catDetected = cat;
         //boolean allSensorOneStatus = getSensors().stream().allMatch(Sensor::getActive);
         boolean allSensorInactive = getSensors().stream().allMatch(sensor -> !sensor.getActive());
 
@@ -115,7 +113,7 @@ public class SecurityService {
     private void handleSensorDeactivated() {
         switch(securityRepository.getAlarmStatus()) {
             case PENDING_ALARM -> setAlarmStatus(AlarmStatus.NO_ALARM);
-            case ALARM -> setAlarmStatus(AlarmStatus.PENDING_ALARM);
+            //case ALARM -> setAlarmStatus(AlarmStatus.PENDING_ALARM);
         }
     }
 
