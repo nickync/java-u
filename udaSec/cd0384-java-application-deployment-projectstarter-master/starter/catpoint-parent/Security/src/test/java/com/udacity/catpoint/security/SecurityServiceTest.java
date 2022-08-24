@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -162,7 +161,7 @@ public class SecurityServiceTest {
         securityService.processImage(catImage);
         securityService.setArmingStatus(ArmingStatus.ARMED_HOME);
 
-        verify(securityRepository).setAlarmStatus(AlarmStatus.ALARM);
+        verify(securityRepository,times(2)).setAlarmStatus(AlarmStatus.ALARM);
     }
 
     @Mock
