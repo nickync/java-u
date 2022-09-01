@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import EmployeeService from '../services/EmployeeService'
+import { Navigate, useNavigate } from 'react-router-dom';
+import EmployeeService from '../services/EmployeeService';
+import withRouter from './withRouter';
 
-export default class ListEmployeeComponent extends Component {
+
+class ListEmployeeComponent extends Component {
 
   constructor(props) {
     super(props)
@@ -9,6 +12,8 @@ export default class ListEmployeeComponent extends Component {
     this.state = {
         employees: []
     }
+
+    this.addEmployee = this.addEmployee.bind(this);
   }
 
   componentDidMount(){
@@ -17,10 +22,20 @@ export default class ListEmployeeComponent extends Component {
     })
   }
 
+  addEmployee(){
+    const { navigate } = this.props;
+
+    navigate('/add-employee')
+  }
+
+
   render() {
     return (
       <div>
         <h2 className="text-center">Employees List</h2>
+        <div className='row'>
+          <button className='btn btn-primary' onClick={this.addEmployee}> Add Employee</button>
+        </div>
         <div className='row'>
           <table className='table table-striped table-bordered'>
 
@@ -52,4 +67,6 @@ export default class ListEmployeeComponent extends Component {
     )
   }
 }
+
+export default withRouter(ListEmployeeComponent);
 
