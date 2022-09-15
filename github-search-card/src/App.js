@@ -22,11 +22,11 @@ export default class App extends Component {
   render() {
     return (
       <div>
-      <Header />
-      <FormInput onSubmit={this.addProfiles}/>
-      <GenerateCard profiles = {this.state.profiles}/>
-      <Footer />
-    </div>
+        <Header />
+        <FormInput onSubmit={this.addProfiles}/>
+        <GenerateCard profiles = {this.state.profiles}/>
+        <Footer />
+      </div>
     )
   }
 }

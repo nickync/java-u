@@ -16,6 +16,8 @@ export default class FormInput extends Component {
     try {
       res = await axios.get(`https://api.github.com/users/${this.state.username}`);
       this.props.onSubmit(res.data);
+      console.log(res.data)
+      console.log(typeof res.data.created_at)
       this.setState({username:''});
     } catch (error) {
       alert("User not found!")
@@ -27,7 +29,7 @@ export default class FormInput extends Component {
     return (
       <div className='text-center'>
         <form  onSubmit={this.handleSubmit}>
-          <InputGroup className='mx-auto w-50'>
+          <InputGroup className='mx-auto w-75'>
             <Form.Control type='text'
               placeholder = "Enter a username" value={this.state.username} onChange={ e => this.setState({username: e.target.value})} required
             />
