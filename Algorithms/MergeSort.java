@@ -6,7 +6,9 @@ public class MergeSort {
         int[] array1 = {9,8,7,6,5,4,3,2,1,0};
         int[] array2 = {9, 99, 9, 0, 3};
 
-        mergeSort(array);
+        System.out.println(Arrays.toString(mergeSort(array)));
+        System.out.println(Arrays.toString(mergeSort(array1)));
+        System.out.println(Arrays.toString(mergeSort(array2)));
 
     }
 
@@ -26,11 +28,39 @@ public class MergeSort {
                 right[i-mid] = array[i];
             }
 
-            System.out.println(Arrays.toString(left));
-            System.out.println(Arrays.toString(right));
             mergeSort(left);
             mergeSort(right);
+
+            int i = 0;
+            int j = 0;
+            int k = 0;
+
+            while (left.length > i && right.length > j) {
+                if (left[i] > right[j]){
+                    array[k] = right[j];
+                    j++;
+                } else {
+                    array[k] = left[i];
+                    i ++;
+                }
+                k++;
+            }
+
+            while (left.length > i){
+                array[k] = left[i];
+                i++;
+                k++;
+            }
+
+            while (right.length > j){
+                array[k] = right[j];
+                j++;
+                k++;
+            }
         }
-        return null;
+        return array;
     }
 }
+
+// Time Complexity: O(N log(N))
+// Auxiliary Space: O(n)
