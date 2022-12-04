@@ -41,3 +41,5 @@ def mergeSort(arr):
 
 
 print(mergeSort(arr))
+print(mergeSort(arr1))
+print(mergeSort(arr2))
