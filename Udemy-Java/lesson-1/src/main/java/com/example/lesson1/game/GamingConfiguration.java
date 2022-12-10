@@ -1,4 +1,4 @@
-package com.example.lesson1;
+package com.example.lesson1.game;
 
 import com.example.lesson1.game.GameRunner;
 import com.example.lesson1.game.GamingConsole;
