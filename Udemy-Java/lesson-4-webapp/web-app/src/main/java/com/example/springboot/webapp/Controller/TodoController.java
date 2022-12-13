@@ -3,8 +3,7 @@ package com.example.springboot.webapp.Controller;
 import com.example.springboot.webapp.Service.TodoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @SessionAttributes("name")
@@ -20,5 +19,15 @@ public class TodoController {
     public String listAllTodos(ModelMap modelMap){
         modelMap.put("todos", todoService.findByUsername("name"));
         return "listTodos";
+    }
+
+    @RequestMapping(value = "add-todo", method = RequestMethod.GET)
+    public String showTodo(){
+        return "todo";
+    }
+
+    @PostMapping("add-todo")
+    public String addTodo(){
+        return "redirect:list-todos";
     }
 }
