@@ -77,7 +77,7 @@ public class TodoJPAController {
         if(result.hasErrors()) {
             return "todo";
         }
-
+        todo.setUsername(getLoggedInUsername());
         todoRepository.save(todo);
         return "redirect:list-todos";
     }
