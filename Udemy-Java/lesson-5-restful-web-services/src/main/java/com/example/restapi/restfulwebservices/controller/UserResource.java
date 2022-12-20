@@ -4,6 +4,8 @@ import com.example.restapi.restfulwebservices.model.User;
 import com.example.restapi.restfulwebservices.service.UserDaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,9 +25,14 @@ public class UserResource {
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable Integer id){
+    public EntityModel<User> getUserById(@PathVariable Integer id){
         Predicate<? super User> predicate = user -> user.getId().equals(id);
-        return userDaoService.findAll().stream().filter(predicate).findFirst().get();
+        User user = userDaoService.findOne(id);
+        EntityModel<User> entityModel = EntityModel.of(user);
+
+        WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers());
+        entityModel.add(link.withRel("all-users"));
+        return entityModel;
     }
 
     @PostMapping("/users")
