@@ -1,5 +1,6 @@
 package com.example.restapi.restfulwebservices.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -9,6 +10,7 @@ public class User {
     private Integer id;
 
     @Size(min = 2, message = "long aaaaa")
+    @JsonProperty("user_name")
     private String name;
 
     @Past(message = "past date not allowed")
