@@ -60,7 +60,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
+
 <!--		local host 8080 becomes hal explorer-->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
