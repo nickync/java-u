@@ -1,6 +1,8 @@
 package com.example.restapi.restfulwebservices.controller;
 
+import com.example.restapi.restfulwebservices.model.Post;
 import com.example.restapi.restfulwebservices.model.User;
+import com.example.restapi.restfulwebservices.repository.PostRepository;
 import com.example.restapi.restfulwebservices.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class UserJpaResource {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PostRepository postRepository;
     @GetMapping("/jpa/users")
     public List<User> retrieveAllUsers(){
         return userRepository.findAll();
@@ -49,5 +53,24 @@ public class UserJpaResource {
     @DeleteMapping("/jpa/users/{id}")
     public void deleteById(@PathVariable int id){
         userRepository.deleteById(id);
+    }
+
+    @GetMapping("/jpa/users/{id}/posts")
+    public List<Post> retrievePostsForUser(@PathVariable int id){
+        User user = userRepository.findById(id).get();
+
+        return user.getPosts();
+    }
+
+    @PostMapping("/jpa/users/{id}/posts")
+    public ResponseEntity<Object> createPostsForUser(@PathVariable int id, @Valid @RequestBody Post post){
+        User user = userRepository.findById(id).get();
+        post.setUser(user);
+        Post savedPost = postRepository.save(post);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPost.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 }
