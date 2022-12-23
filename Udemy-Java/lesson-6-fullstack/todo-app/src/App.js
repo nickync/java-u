@@ -1,25 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import Counter from './component/counter/Counter';
 
 function App() {
   return (
     <div className="App">
-      <FirstComponent/>
-      <SecondComponent/>
+      <Counter />
     </div>
   );
-}
-
-function FirstComponent(){
-  return (
-    <div className='FirstComponent'>First Component</div>
-  )
-}
-
-function SecondComponent(){
-  return (
-    <div className='Second'> Second </div>
-  )
 }
 
 export default App;
