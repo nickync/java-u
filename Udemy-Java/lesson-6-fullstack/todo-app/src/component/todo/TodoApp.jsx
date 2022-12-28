@@ -6,16 +6,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 export default function TodoApp() {
   return (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<LoginComponent />}/>
-            <Route path='/login' element={<LoginComponent />}/>
-            <Route path='/welcome/:username' element={<WelcomeComponent />} />
-            <Route path='*' element={<ErrorComponent />} />
-            <Route path='/todos' element={<ListTodosComponent />} />
-        </Routes>
-        {/* <TodoApp/> */}
-  </BrowserRouter>
+    <>
+        <BrowserRouter>
+            <HeaderComponent />
+            <Routes>
+                <Route path='/' element={<LoginComponent />}/>
+                <Route path='/login' element={<LoginComponent />}/>
+                <Route path='/welcome/:username' element={<WelcomeComponent />} />
+                <Route path='*' element={<ErrorComponent />} />
+                <Route path='/todos' element={<ListTodosComponent />} />
+                <Route path='logout' element={<LogoutComponent />} />
+            </Routes>
+            <FooterComponent />
+        </BrowserRouter>
+    </>
   )
 }
 
@@ -112,10 +116,10 @@ export function ListTodosComponent(){
     }]
 
     return (
-        <div className='ListTodoComponent'>
+        <div className='container'>
             <h1>Things you want to do!</h1>
             <div>
-                <table>
+                <table className='table'>
                     <thead>
                         <tr>
                             <td>id</td>
@@ -138,6 +142,48 @@ export function ListTodosComponent(){
                     </tbody>
                 </table>
             </div>
+        </div>
+    )
+}
+
+export function HeaderComponent(){
+    return (
+        <header className='border-bottom border-light border-5 mb-5 p-2'>
+            <div className='container'>
+                <div className='row'>
+                    <nav className='navbar navbar-expand-lg'>
+                    <a className='navbar-brand ms-2 fs-2 fw-bold text-black' href='#'>Udemy</a>
+                        <div className='collapse navbar-collapse'>
+                            <ul className='navbar-nav'>
+                                <li className='nav-item'><Link className='nav-link' to='/'>Home</Link></li>
+                                <li className='nav-item'><Link className='nav-link' to='/todos'>Todos</Link></li>
+                            </ul>
+                        </div>
+                        <div className='navbar-nav'>
+                            <li className='nav-item'><Link className='nav-link' to='/logout'>Log out</Link></li>
+                            <li className='nav-item'><Link className='nav-link' to='/login'>Log in</Link></li>    
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    )
+}
+
+export function FooterComponent(){
+    return (
+        <footer className='header'>
+            <div className='container'>
+                Your footer
+            </div>
+        </footer>
+    )
+}
+
+export function LogoutComponent(){
+    return (
+        <div className='LogoutComponent'>
+            <div>Thank you for using the app...</div>
         </div>
     )
 }
