@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { retrieveAllTodosForUsername } from "./api/TodoApiService";
 
 export default function ListTodosComponent(){
 
@@ -5,19 +9,18 @@ export default function ListTodosComponent(){
 
     const targetDate = new Date(today.getFullYear()+12, today.getMonth(), today.getDay());
 
-    const todos = [{
-        id:1,
-        description:'Learn AWS',
-        done: false,
-        targetDate: targetDate
-    },
-    {
-        id:2,
-        description:'Learn Full Stack',
-        done:false,
-        targetDate: targetDate
-    }]
+    const {username} = useParams()
 
+    const [todos, setTodos] = useState([])
+    
+    useEffect(
+        () =>  getTodos(),[]
+    )
+
+    function getTodos(username){
+        retrieveAllTodosForUsername(username).then(res => setTodos(res.data))
+    }
+    console.log(username)
     return (
         <div className='container'>
             <h1>Things you want to do!</h1>

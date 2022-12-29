@@ -1,10 +1,11 @@
 package com.in28minutes.rest.webservices.restfulwebservices.todo;
+
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class TodoService {
@@ -14,11 +15,11 @@ public class TodoService {
 	private static int todosCount = 0;
 	
 	static {
-		todos.add(new Todo(++todosCount, "in28minutes","Get AWS Certified", 
+		todos.add(new Todo(++todosCount, "udemy","Get AWS Certified",
 							LocalDate.now().plusYears(10), false ));
-		todos.add(new Todo(++todosCount, "in28minutes","Learn DevOps", 
+		todos.add(new Todo(++todosCount, "udemy","Learn DevOps",
 				LocalDate.now().plusYears(11), false ));
-		todos.add(new Todo(++todosCount, "in28minutes","Learn Full Stack Development", 
+		todos.add(new Todo(++todosCount, "udemy","Learn Full Stack Development",
 				LocalDate.now().plusYears(12), false ));
 	}
 	
