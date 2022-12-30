@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { deleteTodos, retrieveAllTodosForUsername } from "./api/TodoApiService";
+import { useAuth } from "./security/AuthContext";
 
 export default function ListTodosComponent(){
 
@@ -9,28 +10,29 @@ export default function ListTodosComponent(){
 
     const targetDate = new Date(today.getFullYear()+12, today.getMonth(), today.getDay());
 
-    const {username} = useParams()
-
     const [todos, setTodos] = useState([])
 
     const [message, setMessage] = useState(null)
+
+    const authContext = useAuth()
+
+    const username = authContext.username
     
     useEffect(
         () =>  getTodos(),[]
     )
 
-    function getTodos(username){
+    function getTodos(){
         retrieveAllTodosForUsername(username).then(res => setTodos(res.data))
     }
-    
-    const deleteTodo = (id) => {
-        deleteTodos(id).then(
 
+    const deleteTodo = (id) => {
+        deleteTodos(username, id).then(
             () => {
                 setMessage('deleted llll')
                 getTodos()
             }
-            )
+        )
     }
 
     return (
