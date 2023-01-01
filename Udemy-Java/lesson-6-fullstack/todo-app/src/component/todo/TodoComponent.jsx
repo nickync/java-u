@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { retrieveTodoApi } from "./api/TodoApiService"
+import { retrieveTodoApi, updateTodoApi } from "./api/TodoApiService"
 import { useAuth } from "./security/AuthContext"
 
 export default function TodoComponent() {
@@ -33,7 +33,14 @@ export default function TodoComponent() {
     }
 
     const onSubmit = (values) => {
-
+        const todo = {
+            id: id,
+            username: username,
+            description: values.description,
+            targetDate: values.targetDate,
+            done: false
+        }
+        updateTodoApi(username, id, todo)
     }
 
     const validate = (values) => {
