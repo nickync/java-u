@@ -33,12 +33,15 @@ export default function ListTodosComponent(){
             () => {
                 setMessage('deleted llll')
                 getTodos()
-            }
-        )
+            })
     }
 
     const updateTodo = (id) => {
         navigate(`/todo/${id}`)
+    }
+
+    const addNewTodo = () => {
+        navigate(`/todo/-1`)
     }
 
     return (
@@ -61,7 +64,7 @@ export default function ListTodosComponent(){
                             todos.map(todo => (
                                 <tr key={todo.id}>
                                     <td>{todo.description}</td>
-                                    <td>{todo.done}</td>
+                                    <td>{todo.done.toString()}</td>
                                     <td>{todo.targetDate}</td>
                                     <td><button className="btn btn-warning" onClick={() => deleteTodo(todo.id)}>Delete</button></td>
                                     <td><button className="btn btn-warning" onClick={() => updateTodo(todo.id)}>Update</button></td>
@@ -71,6 +74,7 @@ export default function ListTodosComponent(){
                     </tbody>
                 </table>
             </div>
+            <div className="btn btn-success m-3" onClick={addNewTodo}>Add New Todo</div>
         </div>
     )
 }

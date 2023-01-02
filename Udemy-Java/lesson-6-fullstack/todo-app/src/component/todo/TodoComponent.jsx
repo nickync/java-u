@@ -1,8 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik"
+import moment from "moment"
 import { useState } from "react"
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { retrieveTodoApi, updateTodoApi } from "./api/TodoApiService"
+import { useNavigate, useParams } from "react-router-dom"
+import { createTodoApi, retrieveTodoApi, updateTodoApi } from "./api/TodoApiService"
 import { useAuth } from "./security/AuthContext"
 
 export default function TodoComponent() {
@@ -16,6 +17,7 @@ export default function TodoComponent() {
     const [description, setDescription] = useState('')
     const [targetDate, setTargetDate] = useState('')
 
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -24,12 +26,14 @@ export default function TodoComponent() {
     )
 
     function retrieveTodos(){
-        retrieveTodoApi(username, id).then(
-            res => {
-                setDescription(res.data.description)
-                setTargetDate(res.data.targetDate)
-            }
-        )
+        if(id != -1){
+            retrieveTodoApi(username, id).then(
+                res => {
+                    setDescription(res.data.description)
+                    setTargetDate(res.data.targetDate)
+                }
+            )
+        }
     }
 
     const onSubmit = (values) => {
@@ -40,7 +44,16 @@ export default function TodoComponent() {
             targetDate: values.targetDate,
             done: false
         }
-        updateTodoApi(username, id, todo)
+
+        if (id == -1){
+            createTodoApi(username, todo).then(res => {
+                navigate('/todos')
+            })
+        } else {
+            updateTodoApi(username, id, todo).then(res => {
+                navigate('/todos')
+            })
+        }
     }
 
     const validate = (values) => {
@@ -53,9 +66,10 @@ export default function TodoComponent() {
             errors.description = 'Length must be longer than 5'
         }
         
-        if (values.targetDate == null){
+        if (!moment(values.targetDate).isValid()){
             errors.targetDate = 'Invalid date.'
         }
+        
         return errors
     }
 
