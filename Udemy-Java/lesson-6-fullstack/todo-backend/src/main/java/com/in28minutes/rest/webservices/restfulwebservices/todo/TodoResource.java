@@ -39,4 +39,9 @@ public class TodoResource {
         Todo createdTodo = todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), todo.isDone());
         return createdTodo;
     }
+
+    @GetMapping("/basicauth")
+    public String basicAuth(){
+        return "Success";
+    }
 }

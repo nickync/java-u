@@ -15,6 +15,7 @@ export default function TodoComponent() {
     const username = authContext.username
 
     const [description, setDescription] = useState('')
+    
     const [targetDate, setTargetDate] = useState('')
 
     const navigate = useNavigate()
@@ -69,7 +70,7 @@ export default function TodoComponent() {
         if (!moment(values.targetDate).isValid()){
             errors.targetDate = 'Invalid date.'
         }
-        
+
         return errors
     }
 

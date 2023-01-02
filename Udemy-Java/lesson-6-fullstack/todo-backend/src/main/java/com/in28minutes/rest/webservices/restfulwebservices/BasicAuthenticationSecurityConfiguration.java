@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.todo;
+package com.in28minutes.rest.webservices.restfulwebservices;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,7 @@ public class BasicAuthenticationSecurityConfiguration {
                             .httpBasic(Customizer.withDefaults())
                             .sessionManagement(
                                     session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                            .csrf().disable()
-                            .build();
+                            .csrf().disable().build();
 
     }
 }
