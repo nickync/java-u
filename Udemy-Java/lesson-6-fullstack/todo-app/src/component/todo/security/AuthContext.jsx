@@ -62,7 +62,7 @@ export default function AuthProvider({ children }){
                 setUsername(username)
                 setToken(jwtToken)
                 
-                // add tokens to all requests
+                // add tokens to all requests 
                 apiClient.interceptors.request.use(
                     (config) => {
                         console.log('intercepting and adding token')
