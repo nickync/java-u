@@ -19,7 +19,7 @@ class SomeBusinessImplTest {
     @Test
     void findTheGreatestFromAllDataMock(){
         DataService dataService = new MockBean(DataService.class);
-        dataService.retrieveAllData()
+        dataService.retrieveAllData();
     }
 }
 
