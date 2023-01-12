@@ -1,8 +1,6 @@
 package com.example.mockito.mockito.business;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,12 +12,6 @@ class SomeBusinessImplTest {
         SomeBusinessImpl someBusiness = new SomeBusinessImpl(dataServiceStub);
         int result = someBusiness.findTheGreatestFromAllData();
         assertEquals(25, result);
-    }
-
-    @Test
-    void findTheGreatestFromAllDataMock(){
-        DataService dataService = new MockBean(DataService.class);
-        dataService.retrieveAllData();
     }
 }
 
