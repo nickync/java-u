@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<BorderPane fx:controller="com.example.todo.HelloController" xmlns:fx="http://javafx.com/fxml">
+    <left>
+        <ListView fx:id="todoListView" onMouseClicked="#handleClickListView">
+
+        </ListView>
+    </left>
+    <center>
+        <VBox>
+            <TextArea fx:id="itemDetails" VBox.vgrow="ALWAYS"/>
+            <HBox>
+                <Label text="Due: ">
+                    <font>
+                        <Font name="Times New Romen bold" size="20"/>
+                    </font>
+                </Label>
+                <Label fx:id="deadlineLabel">
+                    <font>
+                        <Font name="Times New Roman bold" size="20"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

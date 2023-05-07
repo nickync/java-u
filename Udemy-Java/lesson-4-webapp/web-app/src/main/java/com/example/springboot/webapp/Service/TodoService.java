@@ -1,6 +1,6 @@
 package com.example.springboot.webapp.Service;
 
-import com.example.springboot.webapp.todo.Todo;
+import com.example.springboot.webapp.Todo.Todo;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 

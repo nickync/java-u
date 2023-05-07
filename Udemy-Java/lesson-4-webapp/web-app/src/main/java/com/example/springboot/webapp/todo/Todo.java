@@ -1,4 +1,4 @@
-package com.example.springboot.webapp.todo;
+package com.example.springboot.webapp.Todo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
