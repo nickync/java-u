@@ -1,16 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import java.lang.String?>
+<?import javafx.scene.control.ChoiceBox?>
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.javafx.HelloController" alignment="CENTER" hgap="10" vgap="10">
+    <ComboBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="One" />
+                <String fx:value="Two" />
+                <String fx:value="Three" />
+            </FXCollections>
+        </items>
+        <value>
+            <String fx:value="This is a string"/>
+        </value>
+    </ComboBox>
+    <ChoiceBox GridPane.rowIndex="1" GridPane.columnIndex="4">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="One" />
+                <String fx:value="Two" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+</GridPane>
+        <!--<GridPane xmlns:fx="http://javafx.com/fxml"-->
+<!--          fx:controller="com.example.javafx.HelloController" alignment="CENTER" hgap="10" vgap="10" gridLinesVisible="true">-->
+<!--    <columnConstraints>-->
+<!--        <ColumnConstraints percentWidth="10"/>-->
+<!--        <ColumnConstraints percentWidth="20"/>-->
+<!--        <ColumnConstraints percentWidth="30"/>-->
+<!--        <ColumnConstraints percentWidth="30"/>-->
+<!--        <ColumnConstraints percentWidth="10"/>-->
+<!--    </columnConstraints>-->
+<!--    <Button text="Button1" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="RIGHT"/>-->
+<!--    <Button text="Button2" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
+<!--    <Button text="Button3" GridPane.rowIndex="0" GridPane.columnIndex="2"/>-->
+<!--    <Button text="Button444444dasfdsfsafsdf" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="3"/>-->
+<!--    <Button text="Button5" GridPane.rowIndex="1" GridPane.columnIndex="3" minHeight="100"/>-->
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.javafx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<!--</GridPane>-->
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<!--<?import javafx.scene.layout.HBox?>-->
+<!--<HBox fx:controller="com.example.javafx.HelloController" xmlns:fx="http://javafx.com/fxml" alignment="BOTTOM_RIGHT"-->
+<!--    style="-fx-border-color:red; -fx-border-width:3; -fx-border-style:dashed" spacing="10">-->
+<!--    <padding>-->
+<!--        <Insets bottom="10" right="10" top="10" />-->
+<!--    </padding>-->
+<!--    <Button text="OK" prefWidth="90"/>-->
+<!--    <Button text="Cancel" prefWidth="90"/>-->
+<!--    <Button text="Help" prefWidth="90"/>-->
+<!--</HBox>-->
+
+<!--<?import javafx.scene.layout.BorderPane?>-->
+<!--<?import javafx.scene.layout.HBox?>-->
+<!--<BorderPane fx:controller="com.example.javafx.HelloController" xmlns:fx="http://javafx.com/fxml">-->
+<!--    <top>-->
+<!--        <Label text="Welcome to JavaFX" BorderPane.alignment="CENTER"/>-->
+<!--    </top>-->
+<!--    <left>-->
+<!--        <Label text="This is left" BorderPane.alignment="CENTER"/>-->
+<!--    </left>-->
+<!--    <right>-->
+<!--        <Label text="This is right" BorderPane.alignment="CENTER"/>-->
+<!--    </right>-->
+<!--    <center>-->
+<!--        <Label text="This is center" BorderPane.alignment="CENTER"/>-->
+<!--    </center>-->
+<!--    <bottom>-->
+<!--        <HBox alignment="BOTTOM_RIGHT"-->
+<!--              style="-fx-border-color:red; -fx-border-width:3; -fx-border-style:dashed" spacing="10">-->
+<!--            <padding>-->
+<!--                <Insets bottom="10" right="10" top="10" />-->
+<!--            </padding>-->
+<!--            <Button text="OK" prefWidth="90"/>-->
+<!--            <Button text="Cancel" prefWidth="90"/>-->
+<!--            <Button text="Help" prefWidth="90"/>-->
+<!--        </HBox>-->
+<!--    </bottom>-->
+<!--</BorderPane>-->
+
+<!--<?import javafx.scene.layout.FlowPane?>-->
+<!--<FlowPane fx:controller="com.example.javafx.HelloController" xmlns:fx="http://javafx.com/fxml" orientation="VERTICAL">-->
+<!--    <Button text="Button 1"/>-->
+<!--    <Button text="Button 2"/>-->
+<!--    <Button text="Button 3"/>-->
+<!--    <Button text="Button 4"/>-->
+<!--    <Button text="Button 5"/>-->
+<!--    <Button text="Button 6"/>-->
+<!--</FlowPane>-->
