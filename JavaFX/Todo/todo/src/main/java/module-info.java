@@ -1,6 +1,7 @@
 module com.example.todo {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jlfgr;
 
     requires org.kordamp.bootstrapfx.core;
 
