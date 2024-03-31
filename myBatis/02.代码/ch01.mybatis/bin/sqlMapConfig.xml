@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 1、内部的属性用法 -->
+	<!-- <properties>
+		<property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbc.url" value="jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"/>
+	</properties> -->
+
+	<!-- 2.外部的属性用法 -->
+	<properties resource="jdbc.properties"/>
+	
+	<!-- 定义别名 -->
+	<typeAliases>
+		<!-- 
+			type: 需要映射的类型
+			alias： 别名
+		 -->
+		<typeAlias type="cn.sm1234.domain.Customer" alias="customer"/>
+	</typeAliases>
+	
+	<!-- 数据库环境 -->
+	<environments default="develop">
+		<environment id="develop">
+			<!-- jDBC事务管理 -->
+			<transactionManager type="JDBC"/>
+			<!-- 连接池配置 -->
+			<!-- 
+				POOLED:代表使用mybatis内置连接池（*）
+				UNPOOLED:代表不适用连接池
+			 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="root"/>
+				<property name="password" value="root"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- sql映射文件 -->
+	<mappers>
+		<mapper resource="Customer.xml"/>
+	</mappers>
+	
+</configuration>

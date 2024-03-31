@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 该文件存放CRUD的sql语句 -->
+<mapper namespace="test">
+	<!-- 添加 -->
+	<insert id="insertCustomer" parameterType="customer">
+		INSERT INTO t_customer(NAME,gender,telephone) VALUES(#{name},#{gender},#{telephone})
+	</insert>
+
+	<!-- 修改 -->	
+	<update id="updateCustomer" parameterType="customer">
+		UPDATE t_customer SET NAME = #{name} WHERE id = #{id}
+	</update>
+	
+	<!-- 查询所有数据 -->
+	<select id="queryAllCustomer" resultType="customer">
+		SELECT * FROM t_customer
+	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="queryCustomerById" parameterType="Integer" resultType="customer">
+		SELECT * FROM t_customer WHERE id=#{value}
+	</select>
+	
+	<!-- 根据name模糊查询 -->
+	<select id="queryCustomerByName"  parameterType="string" resultType="customer">
+		SELECT * FROM t_customer WHERE NAME LIKE #{value}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteCustomer" parameterType="int">
+		DELETE FROM t_customer WHERE id=#{value}
+	</delete>	
+</mapper>

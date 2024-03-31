@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sm1234.dao.UserDao">
+	
+	<resultMap type="cn.sm1234.domain.User" id="UserOrderResultMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<!-- 
+			collection:封装集合
+			   property：关联属性名
+		 -->
+		<collection property="orders" javaType="cn.sm1234.domain.Order">
+			<id column="order_id" property="id"/>
+			<result column="orderno" property="orderno"/>
+			<result column="productname" property="productname"/>
+		</collection>
+	</resultMap>
+	
+	
+	<select id="queryUserOrder" resultMap="UserOrderResultMap">
+		SELECT u.id,u.name,o.orderno,o.id order_id,o.productname FROM t_user u LEFT JOIN t_order o ON o.user_id=u.id
+	</select>
+	
+	
+</mapper>

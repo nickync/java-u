@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sm1234.dao.OrderDao">
+	
+	<select id="queryOrderUser" resultType="cn.sm1234.domain.OrderUser">
+		SELECT o.id,o.user_id,u.name,productname 
+			FROM t_order o 
+			LEFT JOIN t_user u ON o.user_id=u.id
+	</select>
+	
+	<resultMap type="cn.sm1234.domain.Order" id="OrderUserResultMap">
+		<id column="id" property="id"/>
+		<result column="productname" property="productname"/>
+		<result column="orderno" property="orderno"/>
+		<!-- 关联属性 
+			property：关联属性名称
+			javaType: 类型
+		-->
+		<association property="user" javaType="cn.sm1234.domain.User">
+			<id column="user_id" property="id"/>
+			<result column="name" property="name"/>
+			<result column="password" property="password"/>
+		</association>
+	</resultMap>
+	
+	<select id="queryOrderUserResultMap" resultMap="OrderUserResultMap">
+		SELECT o.id,o.user_id,u.name,productname 
+			FROM t_order o 
+			LEFT JOIN t_user u ON o.user_id=u.id
+	</select>
+	
+	
+	
+</mapper>
